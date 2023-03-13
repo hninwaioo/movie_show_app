@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../resources/dimens.dart';
 
-class RatingView extends StatelessWidget {
-  const RatingView({Key? key}) : super(key: key);
+class RatingView extends StatefulWidget {
+  // const RatingView({Key? key}) : super(key: key);
+  RatingView(
+      {super.key, required this.ratingAverage});
+  double? ratingAverage;
 
+  @override
+  State<RatingView> createState() => _RatingViewState();
+}
+
+class _RatingViewState extends State<RatingView> {
   @override
   Widget build(BuildContext context) {
     return RatingBar.builder(
+      initialRating: widget.ratingAverage??0.0,
+      allowHalfRating: true,
       itemBuilder: (BuildContext context, int index){
         return Icon(
           Icons.star,
@@ -15,8 +25,10 @@ class RatingView extends StatelessWidget {
         );
       },
       itemSize: MARGIN_MEDIUM_2,
-      onRatingUpdate: (rating){
-        print(rating);
+      onRatingUpdate: (rating) {
+        setState(() {
+          widget.ratingAverage = rating;
+        });
       },
     );
   }

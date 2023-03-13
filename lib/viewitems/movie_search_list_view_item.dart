@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movies_show_app/network/responses/tmdb_movie.dart';
-import 'package:movies_show_app/resources/colors.dart';
 import 'package:movies_show_app/resources/dimens.dart';
 import 'package:movies_show_app/resources/strings.dart';
-import 'package:movies_show_app/widgets/movie_item_image.dart';
 import 'package:movies_show_app/widgets/rating_view.dart';
-import 'package:movies_show_app/widgets/typical_text.dart';
 
 class MovieSearchListViewItem extends StatefulWidget {
   const MovieSearchListViewItem({
@@ -43,101 +40,66 @@ class _MovieSearchListViewItemState extends State<MovieSearchListViewItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.all(Radius.circular(MARGIN_MEDIUM))
-        ),
-        padding: EdgeInsets.all(MARGIN_SMALL),
+        padding: EdgeInsets.only(bottom: MARGIN_SMALL),
 
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             GestureDetector(
-
                 onTap: widget.onPressed,
-                child: Container(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        child:
-                        Container(
-                          height: 230,
-                          width: 150,
-                          child: MovieItemImage(
-                            "$IMAGE_BASE_URL${widget.movie.posterPath}",
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Container(
-                          margin: EdgeInsets.all(MARGIN_MEDIUM),
-                          padding: EdgeInsets.fromLTRB(MARGIN_CARD_MEDIUM_2, MARGIN_MEDIUM, MARGIN_CARD_MEDIUM_2, MARGIN_MEDIUM),
-                          decoration: BoxDecoration(
-                              color: SIGN_PHONE_NUMBER_BUTTON_COLOR,
-                              borderRadius: BorderRadius.circular(15.0)
-                          ),
-                          child: TypicalText(
-                              (widget.movieType == "NOW")
-                              ?
-                              "NOW"
-                              :
-                              "${formattedDate}th\n${formattedMonth}",
-
-                              MOVIES_TAB_COLOR,
-                              TEXT_REGULAR_1X,
-                              isFontWeight500: true
-                          ),
-                          // Text(
-                          //   (widget.movieType == "NOW")?
-                          //   "NOW"
-                          //       : "${formattedDate}th\n${formattedMonth}",
-                          //   textAlign: TextAlign.center,
-                          //   style: TextStyle(
-                          //       color: MOVIES_TAB_COLOR,
-                          //       fontWeight: FontWeight.w500,
-                          //       fontSize: TEXT_REGULAR_1X
-                          //   ),),
-
-                        ),
+                child:
+                Container(
+                  margin: EdgeInsets.only(right: MARGIN_MEDIUM),
+                  height: 230,
+                  width: 150,
+                  child:  ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      child:
+                      Image.network(
+                        "$IMAGE_BASE_URL${widget.movie.posterPath}",
+                        height: BEST_ACTOR_HEIGHT,
+                        fit:BoxFit.fill,
+                        width: MOVIE_LIST_ITEM_WIDTH,
                       )
-                    ],
-                  ),
-                )
+                  )
+                ),
             ),
 
             SizedBox(height: MARGIN_MEDIUM,),
 
-            Container(
-              margin: EdgeInsets.all(MARGIN_MEDIUM),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
 
-                children: [
-                  // TypicalText(widget.movie.title??"", Colors.white, TEXT_REGULAR_2x, isFontWeight700: true,),
-                  Text(
-                    widget.movie.title??"",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  SizedBox(height: MARGIN_MEDIUM,),
-                  Row(
-                    children: [
-
-                      RatingView(),
-                      SizedBox(width: MARGIN_MEDIUM,),
-                      Text(
-                        widget.movie.voteAverage.toString(),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: TEXT_REGULAR
-                        ),
+                  children: [
+                    Text(
+                      widget.movie.title??"",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: TEXT_REGULAR_2x,
+                          fontWeight: FontWeight.w600
                       ),
-                    ],
-                  )
-                ],
+                    ),
+                    SizedBox(height: MARGIN_MEDIUM,),
+                    Row(
+                      children: [
+
+                        RatingView(ratingAverage: widget.movie.voteAverage??0.0),
+                        SizedBox(width: MARGIN_MEDIUM,),
+                        Text(
+                          widget.movie.voteAverage.toString(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: TEXT_REGULAR
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
+
           ],
         )
     );

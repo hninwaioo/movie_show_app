@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movies_show_app/network/datas/movies_api_repository.dart';
 import 'package:movies_show_app/pages/movies_search_screen_page.dart';
 import 'package:movies_show_app/resources/colors.dart';
 import 'package:movies_show_app/resources/dimens.dart';

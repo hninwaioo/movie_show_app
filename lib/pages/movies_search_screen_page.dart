@@ -5,7 +5,6 @@ import 'package:movies_show_app/network/datas/movies_api_repository.dart';
 import 'package:movies_show_app/network/datas/movies_pagination.dart';
 import 'package:movies_show_app/resources/dimens.dart';
 import 'package:movies_show_app/routing/app_router.dart';
-import 'package:movies_show_app/viewitems/movie_list_tile.dart';
 import 'package:movies_show_app/viewitems/movie_list_tile_shimmer.dart';
 import 'package:movies_show_app/viewitems/movie_search_list_view_item.dart';
 
@@ -72,10 +71,9 @@ class MoviesSearchScreenPage extends ConsumerWidget {
                           return const MovieListTileShimmer();
                         }
                         final movie = movies[indexInPage];
-                        return
-
-                            Container(
-                              padding: EdgeInsets.all(MARGIN_MEDIUM_2),
+                        return Container(
+                              margin: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
+                              padding: EdgeInsets.all(MARGIN_MEDIUM),
                               child: MovieSearchListViewItem(
                               movie: movie,
                               movieType: movieType,

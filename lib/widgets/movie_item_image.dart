@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_show_app/resources/dimens.dart';
-import 'package:movies_show_app/widgets/typical_text.dart';
 
 class MovieItemImage extends StatelessWidget {
   final String movies_image;

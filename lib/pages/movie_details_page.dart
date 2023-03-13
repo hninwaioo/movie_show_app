@@ -55,7 +55,7 @@ class MovieDetailsPage extends ConsumerWidget {
                                 SizedBox(height: MARGIN_MEDIUM,),
                                 StoryLineView(movie?.overview??""),
 
-                                SizedBox(height: MARGIN_MEDIUM,),
+                                SizedBox(height: MARGIN_MEDIUM_LARGE,),
 
 
                                 // CastSectionView(
@@ -386,7 +386,7 @@ class MovieDetailAppBarInfoView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    RatingView(),
+                    RatingView(ratingAverage: mMovie?.voteAverage??0.0),
                     SizedBox(height: MARGIN_SMALL,),
                     TypicalText("${mMovie?.voteCount} VOTES", Colors.white,TEXT_REGULAR_2x),
                     SizedBox(height: MARGIN_CARD_MEDIUM_2,)
